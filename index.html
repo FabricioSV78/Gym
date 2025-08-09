@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GYM | Fuerza & Cardio</title>
+  <meta name="description" content="Gimnasio con zona de pesas y cardio, entrenadores certificados, rutinas para principiantes y tienda de suplementos." />
+  <meta property="og:title" content="GYM | Fuerza & Cardio" />
+  <meta property="og:description" content="Entrenamiento personalizado, rutinas guiadas, zona de pesas y cardio. Promoción de inauguración disponible." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/public/og-cover.webp" />
+  <link rel="icon" href="/public/favicon.ico" />
+
+  <!-- Tailwind CSS (Fase MVP) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* Micro-efectos MVP */
+    #progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0;
+      background: #FCB62D;
+      z-index: 50;
+    }
+
+    .cta {
+      animation: pulse 2.2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+    }
+
+    .will-reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity .5s ease, transform .5s ease;
+    }
+
+    .reveal {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card-3d {
+      transition: transform 0.4s ease;
+      transform-style: preserve-3d;
+    }
+
+    .card-3d:hover {
+      transform: rotateY(10deg) rotateX(5deg) scale(1.05);
+    }
+
+    #entrenadores .overflow-x-auto {
+      scroll-behavior: smooth;
+    }
+
+    #muteBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 2px 4px #FCB62D;
+      z-index: 9999;
+      transition: background-color 0.3s ease;
+    }
+
+  </style>
+</head>
+
+<!-- Botón de silencio flotante -->
+<button id="muteBtn" title="Silenciar/Activar">
+    🔊
+</button>
+
+
+<body class="bg-neutral-950 text-white antialiased">
+
+  <!-- Barra de progreso scroll -->
+  <div id="progress"></div>
+
+  <!-- HEADER -->
+  <header class="bg-black/70 sticky top-0 backdrop-blur z-40">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-2">
+        <img src="/public/logo.webp" alt="Logo del gimnasio" class="h-8 w-8" />
+        <span class="font-extrabold tracking-wide text-[#FCB62D]">GYM RAT</span>
+
+      </a>
+
+      <!-- Navegación -->
+      <nav class="hidden md:flex items-center gap-6 text-sm">
+        <a href="#servicios" class="hover:text-[#FCB62D]">Servicios</a>
+        <a href="#instalaciones" class="hover:text-[#FCB62D]">Instalaciones</a>
+        <a href="#planes" class="hover:text-[#FCB62D]">Planes</a>
+        <a href="#entrenadores" class="hover:text-[#FCB62D]">Entrenadores</a>
+        <a href="#contacto" class="hover:text-[#FCB62D]">Contacto</a>
+      </nav>
+
+      <!-- CTA Instagram -->
+      <a href="https://instagram.com/" target="_blank" rel="noopener" class="cta bg-[#FCB62D] hover:bg-[#E5A924] text-black px-4 py-2 rounded-xl shadow-lg">
+        Escríbenos por Instagram
+      </a>
+    </div>
+  </header>
+
+  <!-- BANNER PROMO -->
+  <section class="bg-[#FCB62D] text-black text-center py-2 text-sm">
+    <p class="max-w-6xl mx-auto">
+      🎉 <strong>Promoción flash:</strong> Descuento en membresías por tiempo limitado.
+    </p>
+  </section>
+
+  <!-- HERO -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 -z-10">
+      <!-- Video desktop -->
+      <video id="hero-video" class="hidden md:block w-full h-full object-cover" src="/public/inicio.mp4" autoplay loop muted playsinline></video>
+      <!-- Imagen móvil -->
+      <img class="md:hidden w-full h-full object-cover" src="/public/hero-mobile.webp" alt="Personas entrenando en zona de pesas" />
+      <div class="absolute inset-0 bg-gradient-to-t from-neutral-950/80 via-neutral-950/40 to-transparent"></div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-4 py-28 md:py-40">
+      <h1 class="text-4xl md:text-6xl font-extrabold leading-tight will-reveal">Fuerza, Cardio y Acompañamiento Real</h1>
+      <p class="mt-4 text-neutral-300 max-w-xl will-reveal">
+        Zona de pesas y cardio, entrenadores especializados, rutinas para principiantes y tienda de suplementos.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3 will-reveal">
+        <a href="#planes" class="bg-[#FCB62D] hover:bg-[#E5A924] text-black px-6 py-3 rounded-xl font-semibold shadow-lg">Ver planes</a>
+        <a href="#servicios" class="border border-neutral-700 hover:border-neutral-500 px-6 py-3 rounded-xl">Conocer servicios</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Servicios (lo que SI existe) -->
+  <section id="servicios" class="bg-neutral-900 py-16 -mt-px">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-bold mb-8 will-reveal">Servicios</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Entrenamiento personalizado -->
+        <article class="bg-neutral-800/60 p-6 rounded-2xl hover:scale-[1.02] transition will-reveal">
+          <img src="/public/icons/personal.webp" alt="Icono entrenador" class="h-10 mb-4" />
+          <h3 class="font-semibold mb-2">Entrenamiento personalizado</h3>
+          <p class="text-sm text-neutral-300">Plan a medida con seguimiento de entrenador certificado.</p>
+        </article>
+        <!-- Rutinas principiantes -->
+        <article class="bg-neutral-800/60 p-6 rounded-2xl hover:scale-[1.02] transition will-reveal">
+          <img src="/public/icons/principiante.webp" alt="Icono principiantes" class="h-10 mb-4" />
+          <h3 class="font-semibold mb-2">Rutinas para principiantes</h3>
+          <p class="text-sm text-neutral-300">Programas de 4–8 semanas para iniciar de forma segura.</p>
+        </article>
+        <!-- Entrenamiento libre -->
+        <article class="bg-neutral-800/60 p-6 rounded-2xl hover:scale-[1.02] transition will-reveal">
+          <img src="/public/icons/mancuernas.webp" alt="Icono pesas" class="h-10 mb-4" />
+          <h3 class="font-semibold mb-2">Entrenamiento libre</h3>
+          <p class="text-sm text-neutral-300">Uso de máquinas y pesas con soporte rápido en piso.</p>
+        </article>
+        <!-- Eventos/retos -->
+        <article class="bg-neutral-800/60 p-6 rounded-2xl hover:scale-[1.02] transition will-reveal">
+          <img src="/public/icons/trofeo.webp" alt="Icono trofeo" class="h-10 mb-4" />
+          <h3 class="font-semibold mb-2">Eventos y retos</h3>
+          <p class="text-sm text-neutral-300">Desafíos mensuales para mantenerte motivado.</p>
+        </article>
+        <!-- Bienestar y salud -->
+        <article class="bg-neutral-800/60 p-6 rounded-2xl hover:scale-[1.02] transition will-reveal">
+          <img src="/public/icons/trofeo.webp" alt="Icono trofeo" class="h-10 mb-4" />
+          <h3 class="font-semibold mb-2">Bienestar y salud</h3>
+          <p class="text-sm text-neutral-300">Evaluaciones fisicas, fisioterapia y asesoria nutricional.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Instalaciones -->
+  <section id="instalaciones" class="bg-neutral-950 py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-bold mb-8 will-reveal">Instalaciones</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Pesas -->
+        <figure class="group will-reveal">
+          <img src="/public/instalaciones/pesas.jpg" alt="Zona de pesas" class="rounded-2xl w-full h-52 object-cover group-hover:opacity-90 transition" loading="lazy" />
+          <figcaption class="mt-2 text-sm text-neutral-300">Zona de pesas</figcaption>
+        </figure>
+        <!-- Cardio -->
+        <figure class="group will-reveal">
+          <img src="/public/instalaciones/cardio.jpg" alt="Zona de cardio" class="rounded-2xl w-full h-52 object-cover group-hover:opacity-90 transition" loading="lazy" />
+          <figcaption class="mt-2 text-sm text-neutral-300">Zona de cardio</figcaption>
+        </figure>
+        <!-- Lockers -->
+        <figure class="group will-reveal">
+          <img src="/public/instalaciones/lockers.jpg" alt="Casilleros" class="rounded-2xl w-full h-52 object-cover group-hover:opacity-90 transition" loading="lazy" />
+          <figcaption class="mt-2 text-sm text-neutral-300">Casilleros</figcaption>
+        </figure>
+        <!-- Duchas -->
+        <figure class="group will-reveal">
+          <img src="/public/instalaciones/duchas.jpg" alt="Duchas" class="rounded-2xl w-full h-52 object-cover group-hover:opacity-90 transition" loading="lazy" />
+          <figcaption class="mt-2 text-sm text-neutral-300">Duchas</figcaption>
+        </figure>
+        <!-- Batidos -->
+        <figure class="group will-reveal">
+          <img src="/public/instalaciones/batidos.jpg" alt="Zona de batidos" class="rounded-2xl w-full h-52 object-cover group-hover:opacity-90 transition" loading="lazy" />
+          <figcaption class="mt-2 text-sm text-neutral-300">Zona de batidos</figcaption>
+        </figure>
+        <!-- Estacionamiento -->
+        <figure class="group will-reveal">
+          <img src="/public/instalaciones/estacionamiento_vehicular.jpg" alt="Estacionamiento" class="rounded-2xl w-full h-52 object-cover group-hover:opacity-90 transition" loading="lazy" />
+          <figcaption class="mt-2 text-sm text-neutral-300">Estacionamiento</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Planes y precios -->
+  <section id="planes" class="bg-neutral-900 py-16 -mt-px">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-bold mb-8 will-reveal">Planes de membresía</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Mensual -->
+        <div class="bg-neutral-800/60 rounded-2xl p-6 flex flex-col will-reveal">
+          <h3 class="font-semibold text-lg">Mensual</h3>
+          <p class="text-3xl font-extrabold mt-2">S/ XXX</p>
+          <ul class="mt-4 text-sm text-neutral-300 space-y-2">
+            <li>Acceso a pesas y cardio</li>
+            <li>Rutinas guiadas</li>
+            <li>Soporte en piso</li>
+          </ul>
+          <a href="https://instagram.com/" target="_blank" class="mt-6 bg-[#FCB62D] hover:bg-[#E5A924] text-black text-center py-2 rounded-xl">Quiero este plan</a>
+        </div>
+        <!-- Trimestral -->
+        <div class="bg-neutral-800/60 rounded-2xl p-6 flex flex-col ring-2 ring-[#FCB62D] will-reveal">
+          <h3 class="font-semibold text-lg">Trimestral</h3>
+          <p class="text-3xl font-extrabold mt-2">S/ XXX</p>
+          <ul class="mt-4 text-sm text-neutral-300 space-y-2">
+            <li>Todo lo del Mensual</li>
+            <li>Evaluación física inicial</li>
+            <li>Descuento en tienda</li>
+          </ul>
+          <a href="https://instagram.com/" target="_blank" class="mt-6 bg-[#FCB62D] hover:bg-[#E5A924] text-black text-center py-2 rounded-xl">Quiero este plan</a>
+        </div>
+        <!-- Anual -->
+        <div class="bg-neutral-800/60 rounded-2xl p-6 flex flex-col will-reveal">
+          <h3 class="font-semibold text-lg">Anual</h3>
+          <p class="text-3xl font-extrabold mt-2">S/ XXX</p>
+          <ul class="mt-4 text-sm text-neutral-300 space-y-2">
+            <li>Todo lo del Trimestral</li>
+            <li>Asesoría nutricional</li>
+            <li>Eventos y retos</li>
+          </ul>
+          <a href="https://instagram.com/" target="_blank" class="mt-6 bg-[#FCB62D] hover:bg-[#E5A924] text-black text-center py-2 rounded-xl">Quiero este plan</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Entrenadores -->
+    <section id="entrenadores" class="bg-neutral-950 py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-bold mb-8 will-reveal">Entrenadores</h2>
+
+      <div class="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:overflow-visible">
+
+        <!-- Card entrenador -->
+        <article class="entrenador-card relative group w-80 sm:w-auto h-96 rounded-2xl overflow-hidden shadow-lg snap-start will-reveal">
+          <img src="/public/trainers/entrenador.jpg" alt="Entrenador" 
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+          <span class="absolute top-4 left-4 bg-[#FCB62D] text-black text-xs font-bold px-3 py-1 rounded-full">Fuerza</span>
+          <div class="absolute bottom-4 left-4 text-white">
+            <h3 class="text-lg font-semibold">Carlos Mendoza</h3>
+            <p class="text-sm text-neutral-300">Especialista en fuerza y acondicionamiento</p>
+          </div>
+
+          <!-- Botón contacto -->
+          <a href="https://instagram.com/" target="_blank"
+            class="contact-btn absolute inset-0 flex items-center justify-center opacity-0 translate-y-4 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 transition duration-300 bg-black/50">
+            <span class="bg-[#FCB62D] text-black px-4 py-2 rounded-xl font-semibold">Contactar</span>
+          </a>
+        </article>
+
+        <!-- Card entrenador -->
+        <article class="entrenador-card relative group w-80 sm:w-auto h-96 rounded-2xl overflow-hidden shadow-lg snap-start will-reveal">
+          <img src="/public/trainers/entrenador.jpg" alt="Entrenador" 
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+          <span class="absolute top-4 left-4 bg-[#FCB62D] text-black text-xs font-bold px-3 py-1 rounded-full">Potencia</span>
+          <div class="absolute bottom-4 left-4 text-white">
+            <h3 class="text-lg font-semibold">Carlos Mendoza</h3>
+            <p class="text-sm text-neutral-300">Especialista en velocidad y potencia</p>
+          </div>
+
+          <!-- Botón contacto -->
+          <a href="https://instagram.com/" target="_blank"
+            class="contact-btn absolute inset-0 flex items-center justify-center opacity-0 translate-y-4 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 transition duration-300 bg-black/50">
+            <span class="bg-[#FCB62D] text-black px-4 py-2 rounded-xl font-semibold">Contactar</span>
+          </a>
+        </article>
+
+        <!-- Card entrenador -->
+        <article class="entrenador-card relative group w-80 sm:w-auto h-96 rounded-2xl overflow-hidden shadow-lg snap-start will-reveal">
+          <img src="/public/trainers/entrenador.jpg" alt="Entrenador" 
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+          <span class="absolute top-4 left-4 bg-[#FCB62D] text-black text-xs font-bold px-3 py-1 rounded-full">Resistencia</span>
+          <div class="absolute bottom-4 left-4 text-white">
+            <h3 class="text-lg font-semibold">Carlos Mendoza</h3>
+            <p class="text-sm text-neutral-300">Especialista en cardio y resistencia</p>
+          </div>
+
+          <!-- Botón contacto -->
+          <a href="https://instagram.com/" target="_blank"
+            class="contact-btn absolute inset-0 flex items-center justify-center opacity-0 translate-y-4 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 transition duration-300 bg-black/50">
+            <span class="bg-[#FCB62D] text-black px-4 py-2 rounded-xl font-semibold">Contactar</span>
+          </a>
+        </article>
+
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contacto" class="bg-neutral-900 py-16 -mt-px">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-8 items-start">
+      <div class="will-reveal">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Contáctanos</h2>
+        <p class="text-neutral-300 mb-6">Escríbenos por Instagram o visítanos en nuestra ubicación.</p>
+        <div class="flex gap-3">
+          <a href="https://instagram.com/" target="_blank" class="bg-gradient-to-r from-[#FCB62D] to-[#E5A924] hover:to-[#FCB62D] px-5 py-3 rounded-xl font-semibold text-black">Instagram</a>
+          <a href="https://facebook.com/" target="_blank" class="border border-neutral-700 hover:border-neutral-500 px-5 py-3 rounded-xl">Facebook</a>
+        </div>
+        <ul class="mt-6 text-sm text-neutral-300 space-y-2">
+          <li><strong>Horario:</strong> Lun-Sáb 5:20 am – 12:00 am</li>
+          <li><strong>Dirección:</strong> Calle / Av. América Oeste — Trujillo</li>
+        </ul>
+      </div>
+      <div class="will-reveal">
+        <!-- Google Maps embebido -->
+        <div class="aspect-video rounded-2xl overflow-hidden shadow-lg">
+          <iframe class="w-full h-full" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3950.0492639580284!2d-79.04400202410922!3d-8.096458891932256!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91ad17002698e535%3A0x42d765af42d5c36e!2sGYM%20RAT%20CLUB!5e0!3m2!1ses!2spe!4v1754710487930!5m2!1ses!2spe" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa del gimnasio"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-black py-10">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-neutral-400">
+      <p>© <span id="year"></span> GYM RAT. Todos los derechos reservados.</p>
+      <div class="flex items-center gap-3">
+        <a href="#" class="hover:text-neutral-200">Términos</a>
+        <span class="opacity-50">•</span>
+        <a href="#" class="hover:text-neutral-200">Privacidad</a>
+      </div>
+    </div>
+  </footer>
+
+<!-- SCRIPTS -->
+  <script>
+    // Lógica tarjetas entrenadores
+    document.querySelectorAll('.entrenador-card').forEach(card => {
+      let tapped = false;
+
+      card.addEventListener('click', function (e) {
+        if (window.innerWidth < 768) {
+          const btn = this.querySelector('.contact-btn');
+          if (!tapped) {
+            e.preventDefault();
+            btn.classList.remove('pointer-events-none', 'opacity-0', 'translate-y-4');
+            btn.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+            tapped = true;
+
+            const hideOnOutsideClick = (ev) => {
+              if (!card.contains(ev.target)) {
+                btn.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+                btn.classList.add('pointer-events-none', 'opacity-0', 'translate-y-4');
+                tapped = false;
+                document.removeEventListener('click', hideOnOutsideClick);
+              }
+            };
+            setTimeout(() => document.addEventListener('click', hideOnOutsideClick), 0);
+          }
+        }
+      });
+
+      // Efecto 3D en PC
+      card.addEventListener('mousemove', e => {
+        if (window.innerWidth >= 768) {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const rotateY = ((x / rect.width) - 0.5) * 10;
+          const rotateX = ((y / rect.height) - 0.5) * -10;
+          card.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg) scale(1.05)`;
+        }
+      });
+
+      card.addEventListener('mouseleave', () => card.style.transform = 'rotateY(0deg) rotateX(0deg) scale(1)');
+
+      // Mostrar botón en hover (PC)
+      card.addEventListener('mouseenter', () => {
+        if (window.innerWidth >= 768) {
+          card.querySelector('.contact-btn').classList.add('opacity-100', 'pointer-events-auto');
+        }
+      });
+      card.addEventListener('mouseleave', () => {
+        if (window.innerWidth >= 768) {
+          card.querySelector('.contact-btn').classList.remove('opacity-100', 'pointer-events-auto');
+        }
+      });
+    });
+
+    // Modal instalaciones
+    document.querySelectorAll('#instalaciones img').forEach(img => {
+      img.addEventListener('click', () => {
+        const modal = document.createElement('div');
+        modal.className = "fixed inset-0 bg-black/80 flex items-center justify-center z-50";
+        modal.innerHTML = `
+          <div class="relative max-w-4xl w-full p-4">
+            <button class="absolute top-2 right-2 text-white text-2xl">&times;</button>
+            <img src="${img.src}" class="rounded-xl w-full max-h-[90vh] object-contain" />
+          </div>
+        `;
+        document.body.appendChild(modal);
+        modal.querySelector('button').addEventListener('click', () => modal.remove());
+        modal.addEventListener('click', e => { if(e.target === modal) modal.remove(); });
+      });
+    });
+
+    // Año dinámico
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Reveal on scroll
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('reveal');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.will-reveal').forEach(el => obs.observe(el));
+
+    // Barra de progreso scroll
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement;
+      const p = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+      document.getElementById('progress').style.width = p + '%';
+    });
+  </script>
+
+  <audio id="bgMusic" autoplay loop>
+    <source src="highest.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const music = document.getElementById("bgMusic");
+    const muteBtn = document.getElementById("muteBtn");
+
+    muteBtn.addEventListener("click", () => {
+        music.muted = !music.muted;
+        muteBtn.textContent = music.muted ? "🔇" : "🔊";
+    });
+  </script>
+
+</body>
+</html>
