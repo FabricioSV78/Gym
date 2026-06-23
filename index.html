@@ -74,6 +74,24 @@
       transition: background-color 0.3s ease;
     }
 
+    #servicios .services-grid > article {
+      height: 100%;
+    }
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+      #servicios .services-grid > article:last-child {
+        grid-column: 1 / -1;
+        justify-self: center;
+        width: min(100%, 24rem);
+      }
+    }
+
+    @media (min-width: 1024px) and (max-width: 1279px) {
+      #servicios .services-grid > article:last-child {
+        grid-column: 2;
+      }
+    }
+
   </style>
 </head>
 
@@ -83,16 +101,16 @@
 </button>
 
 
-<body class="bg-neutral-950 text-white antialiased">
+<body class="overflow-x-hidden bg-neutral-950 text-white antialiased">
 
   <!-- Barra de progreso scroll -->
   <div id="progress"></div>
 
   <!-- HEADER -->
   <header class="bg-black/70 sticky top-0 backdrop-blur z-40">
-    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+    <div class="mx-auto flex max-w-6xl flex-col items-stretch gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
       <!-- Logo -->
-      <a href="#" class="flex items-center gap-2">
+      <a href="#" class="flex min-w-0 items-center gap-2">
         <img src="/public/logo.webp" alt="Logo del gimnasio" class="h-8 w-8" />
         <span class="font-extrabold tracking-wide text-[#FCB62D]">GYM RAT</span>
 
@@ -108,37 +126,37 @@
       </nav>
 
       <!-- CTA Instagram -->
-      <a href="https://instagram.com/" target="_blank" rel="noopener" class="cta bg-[#FCB62D] hover:bg-[#E5A924] text-black px-4 py-2 rounded-xl shadow-lg">
+      <a href="https://instagram.com/" target="_blank" rel="noopener" class="cta inline-flex min-h-[48px] w-full items-center justify-center rounded-xl bg-[#FCB62D] px-4 py-2 text-sm font-semibold text-black shadow-lg hover:bg-[#E5A924] sm:ml-auto sm:w-auto">
         Escríbenos por Instagram
       </a>
     </div>
   </header>
 
   <!-- BANNER PROMO -->
-  <section class="bg-[#FCB62D] text-black text-center py-2 text-sm">
-    <p class="max-w-6xl mx-auto">
+  <section class="bg-[#FCB62D] py-2 text-center text-xs text-black sm:text-sm">
+    <p class="mx-auto max-w-[22rem] px-4 leading-snug sm:max-w-6xl">
       🎉 <strong>Promoción flash:</strong> Descuento en membresías por tiempo limitado.
     </p>
   </section>
 
   <!-- HERO -->
-  <section class="relative overflow-hidden">
+  <section class="relative min-h-[72svh] overflow-hidden sm:min-h-[80svh]">
     <div class="absolute inset-0 -z-10">
       <!-- Video desktop -->
-      <video id="hero-video" class="hidden md:block w-full h-full object-cover" src="/public/inicio.mp4" autoplay loop muted playsinline></video>
+      <video id="hero-video" class="hidden h-full w-full object-cover object-center md:block" src="/public/inicio.mp4" autoplay loop muted playsinline></video>
       <!-- Imagen móvil -->
-      <img class="md:hidden w-full h-full object-cover" src="/public/movil.webp" alt="Personas entrenando en zona de pesas" />
+      <img class="h-full w-full object-cover object-center md:hidden" src="/public/movil.webp" alt="Personas entrenando en zona de pesas" />
       <div class="absolute inset-0 bg-gradient-to-t from-neutral-950/80 via-neutral-950/40 to-transparent"></div>
     </div>
 
-    <div class="max-w-6xl mx-auto px-4 py-28 md:py-40">
-      <h1 class="text-4xl md:text-6xl font-extrabold leading-tight will-reveal">Fuerza, Cardio y Acompañamiento Real</h1>
-      <p class="mt-4 text-neutral-300 max-w-xl will-reveal">
+    <div class="mx-auto max-w-6xl px-4 py-24 sm:py-28 md:py-40">
+      <h1 class="max-w-[11ch] text-4xl font-extrabold leading-[0.95] will-reveal sm:text-5xl md:max-w-3xl md:text-6xl md:leading-tight">Fuerza, Cardio y Acompañamiento Real</h1>
+      <p class="mt-4 max-w-xl text-base text-neutral-300 will-reveal sm:text-lg">
         Zona de pesas y cardio, entrenadores especializados, rutinas para principiantes y tienda de suplementos.
       </p>
-      <div class="mt-8 flex flex-wrap gap-3 will-reveal">
-        <a href="#planes" class="bg-[#FCB62D] hover:bg-[#E5A924] text-black px-6 py-3 rounded-xl font-semibold shadow-lg">Ver planes</a>
-        <a href="#servicios" class="border border-neutral-700 hover:border-neutral-500 px-6 py-3 rounded-xl">Conocer servicios</a>
+      <div class="mt-8 flex flex-col gap-3 will-reveal sm:flex-row sm:flex-wrap">
+        <a href="#planes" class="inline-flex min-h-[48px] items-center justify-center rounded-xl bg-[#FCB62D] px-6 py-3 font-semibold text-black shadow-lg hover:bg-[#E5A924]">Ver planes</a>
+        <a href="#servicios" class="inline-flex min-h-[48px] items-center justify-center rounded-xl border border-neutral-700 px-6 py-3 hover:border-neutral-500">Conocer servicios</a>
       </div>
     </div>
   </section>
@@ -148,10 +166,10 @@
   <section id="servicios" class="bg-neutral-900 py-16 -mt-px">
     <div class="max-w-6xl mx-auto px-4">
       <h2 class="text-3xl md:text-4xl font-bold mb-8 will-reveal">Servicios</h2>
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="services-grid grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
         <!-- Entrenamiento personalizado -->
         <article class="bg-neutral-800/60 p-6 rounded-2xl hover:scale-[1.02] transition will-reveal">
-          <img src="/public/icons/personal.webp" alt="Icono entrenador" class="h-10 mb-4" />
+          <img src="/public/icons/personal.webp" alt="Icono entrenador" class="mb-4 h-10" />
           <h3 class="font-semibold mb-2">Entrenamiento personalizado</h3>
           <p class="text-sm text-neutral-300">Plan a medida con seguimiento de entrenador certificado.</p>
         </article>
@@ -175,7 +193,7 @@
         </article>
         <!-- Bienestar y salud -->
         <article class="bg-neutral-800/60 p-6 rounded-2xl hover:scale-[1.02] transition will-reveal">
-          <img src="/public/icons/salud.webp" alt="Icono trofeo" class="h-10 mb-4" />
+          <img src="/public/icons/salud.webp" alt="Icono bienestar y salud" class="mb-4 h-10" />
           <h3 class="font-semibold mb-2">Bienestar y salud</h3>
           <p class="text-sm text-neutral-300">Evaluaciones fisicas, fisioterapia y asesoria nutricional.</p>
         </article>
@@ -336,9 +354,9 @@
       <div class="will-reveal">
         <h2 class="text-3xl md:text-4xl font-bold mb-4">Contáctanos</h2>
         <p class="text-neutral-300 mb-6">Escríbenos por Instagram o visítanos en nuestra ubicación.</p>
-        <div class="flex gap-3">
-          <a href="https://instagram.com/" target="_blank" class="bg-gradient-to-r from-[#FCB62D] to-[#E5A924] hover:to-[#FCB62D] px-5 py-3 rounded-xl font-semibold text-black">Instagram</a>
-          <a href="https://facebook.com/" target="_blank" class="border border-neutral-700 hover:border-neutral-500 px-5 py-3 rounded-xl">Facebook</a>
+        <div class="flex flex-wrap gap-3">
+          <a href="https://instagram.com/" target="_blank" class="inline-flex min-h-[48px] items-center justify-center rounded-xl bg-gradient-to-r from-[#FCB62D] to-[#E5A924] px-5 py-3 font-semibold text-black hover:to-[#FCB62D]">Instagram</a>
+          <a href="https://facebook.com/" target="_blank" class="inline-flex min-h-[48px] items-center justify-center rounded-xl border border-neutral-700 px-5 py-3 hover:border-neutral-500">Facebook</a>
         </div>
         <ul class="mt-6 text-sm text-neutral-300 space-y-2">
           <li><strong>Horario:</strong> Lun-Sáb 5:20 am – 12:00 am</li>
